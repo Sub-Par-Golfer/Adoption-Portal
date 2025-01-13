@@ -1,0 +1,120 @@
+.App {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  h1 {
+    color: #4CAF50;
+  }
+  
+  h2 {
+    margin-top: 30px;
+    font-size: 26px;
+    color: #4CAF50;
+    text-align: left;
+  }
+  
+  p {
+    margin: 8px 0;
+    color: #666;
+  }
+  
+  img {
+    border-radius: 8px;
+  }
+  /* Form Styling */
+form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+select {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+select, input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+  /* Pet Card Styling */
+.pet-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: 250px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pet-card img {
+  width: 50%;
+  border-radius: 10px;
+}
+
+.pet-card h3 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.pet-card p {
+  margin: 5px 0;
+}
+
+.adopt-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.adopt-button:hover {
+  background-color: #45a049;
+}
