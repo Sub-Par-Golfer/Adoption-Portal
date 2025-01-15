@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../Navbar.css";
 
 function Navbar({
-  speciesOptions,
-  ageOptions,
-  sizeOptions,
   setFilters,
   filters,
   handleSubmit,
@@ -12,7 +10,39 @@ function Navbar({
   currentPage,
   setCurrentPage,
   fetchPets,
+  getAccessToken,
 }) {
+  const [speciesOptions, setSpeciesOptions] = useState([]);
+  // Hardcoded Age and Size Options
+  const ageOptions = ["Baby", "Young", "Adult", "Senior"];
+  const sizeOptions = ["Small", "Medium", "Large", "Extra Large"];
+
+  // Fetch search values from the API
+  const fetchSearchValues = async () => {
+    try {
+      const token =
+        localStorage.getItem("accessToken") || (await getAccessToken());
+
+      const response = await axios.get("https://api.petfinder.com/v2/types", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch search values.");
+      }
+
+      const data = response.data.types;
+
+      // Extract dynamic values for species
+      const species = data.map((type) => type.name);
+      setSpeciesOptions(species);
+    } catch (error) {
+      console.error("Error fetching search values:", error);
+    }
+  };
+
   // Function to get user's location and update the Zip Code field
   const getUserLocation = () => {
     if (navigator.geolocation) {
@@ -25,6 +55,11 @@ function Navbar({
             const response = await fetch(
               `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
             );
+
+            if (!response.ok) {
+              throw new Error("Failed to fetch location.");
+            }
+
             const data = await response.json();
             const postalCode = data.postcode;
 
@@ -33,8 +68,9 @@ function Navbar({
                 ...prevFilters,
                 location: postalCode,
               }));
+
               // Automatically trigger form submission
-              fetchPets();
+              handleSubmit(new Event("submit"));
             }
           } catch (error) {
             console.error("Error fetching location:", error);
@@ -49,7 +85,13 @@ function Navbar({
 
   // Automatically get location on page load
   useEffect(() => {
-    getUserLocation();
+    const fetchData = async () => {
+      await getAccessToken();
+      getUserLocation();
+      await fetchSearchValues();
+    };
+
+    fetchData();
   }, []);
 
   return (
