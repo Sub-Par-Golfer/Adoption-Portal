@@ -10,6 +10,7 @@ function App() {
   const [speciesOptions, setSpeciesOptions] = useState([]);
   const [ageOptions, setAgeOptions] = useState([]);
   const [sizeOptions, setSizeOptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     type: "",
     age: "",
@@ -22,11 +23,9 @@ function App() {
   // Fetch access token
   const getAccessToken = async () => {
     try {
-      // Check if the token already exists in localStorage
       const existingToken = localStorage.getItem("accessToken");
       if (existingToken) return existingToken;
 
-      // Fetch a new token
       const response = await axios.post(
         "https://api.petfinder.com/v2/oauth2/token",
         {
@@ -45,6 +44,7 @@ function App() {
     }
   };
 
+  // Fetch search values
   const fetchSearchValues = async () => {
     const token =
       localStorage.getItem("accessToken") || (await getAccessToken());
@@ -58,10 +58,7 @@ function App() {
 
       const data = response.data.types;
 
-      // Extract species options
       const species = data.map((type) => type.name);
-
-      // Flatten and deduplicate age and size values across all types
       const ages = Array.from(new Set(data.flatMap((type) => type.ages || [])));
       const sizes = Array.from(
         new Set(data.flatMap((type) => type.sizes || []))
@@ -77,6 +74,7 @@ function App() {
 
   // Fetch pets function
   const fetchPets = async (page = 1) => {
+    setIsLoading(true); // Start loading state
     const token =
       localStorage.getItem("accessToken") || (await getAccessToken());
 
@@ -86,7 +84,6 @@ function App() {
         page: page,
       };
 
-      // Add filters to the request if they are set
       if (filters.type) params.type = filters.type;
       if (filters.age) params.age = filters.age;
       if (filters.size) params.size = filters.size;
@@ -104,7 +101,6 @@ function App() {
         params,
       });
 
-      // Filter out animals without images
       const animalsWithImages = response.data.animals.filter(
         (animal) => animal.photos.length > 0
       );
@@ -113,6 +109,8 @@ function App() {
       setPaginationInfo(response.data.pagination);
     } catch (error) {
       console.error("Error fetching pets:", error);
+    } finally {
+      setIsLoading(false); // End loading state
     }
   };
 
@@ -126,6 +124,7 @@ function App() {
   useEffect(() => {
     getAccessToken();
     fetchSearchValues();
+    fetchPets();
   }, []);
 
   // Fetch pets whenever accessToken or currentPage changes
@@ -138,19 +137,19 @@ function App() {
   return (
     <div className="App">
       <Navbar
-  speciesOptions={speciesOptions}
-  ageOptions={ageOptions}
-  sizeOptions={sizeOptions}
-  setFilters={setFilters}
-  filters={filters}
-  handleSubmit={handleSubmit}
-  paginationInfo={paginationInfo}
-  currentPage={currentPage}
-  setCurrentPage={setCurrentPage}
-  fetchPets={fetchPets}
-  getAccessToken={getAccessToken}  // Pass the function as a prop
-/>
-      <PetList pets={pets} />
+        speciesOptions={speciesOptions}
+        ageOptions={ageOptions}
+        sizeOptions={sizeOptions}
+        setFilters={setFilters}
+        filters={filters}
+        handleSubmit={handleSubmit}
+        paginationInfo={paginationInfo}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        fetchPets={fetchPets}
+        getAccessToken={getAccessToken} // Pass the function as a prop
+      />
+      <PetList pets={pets} isLoading={isLoading} />
     </div>
   );
 }

@@ -1,7 +1,31 @@
 import React from "react";
 import "../PetList.css";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-function PetList({ pets }) {
+function PetList({ pets, isLoading }) {
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Available Animals</h1>
+        <div className="pet-grid">
+          {Array.from({ length: 15 }).map((_, index) => (
+            <div key={index} className="pet-card">
+              <Skeleton height={20} width={150} style={{ marginBottom: "10px" }} />
+              <Skeleton height={200} />
+              <div className="pet-info">
+                <Skeleton height={20} width={100} />
+                <Skeleton height={20} width={80} style={{ margin: "10px 0" }} />
+                <Skeleton height={20} width={120} />
+              </div>
+              <Skeleton height={30} width={100} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (pets.length === 0) {
     return <p>No pets found. Please try again later.</p>;
   }
