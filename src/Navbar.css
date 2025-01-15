@@ -44,14 +44,14 @@
   
   /* Button styling */
   .navbar button {
-    background-color: #ff5722;
+    background-color: #228dff;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
   .navbar button:hover {
-    background-color: #e64a19;
+    background-color: #182ab1;
   }
   
   /* Pagination controls */
