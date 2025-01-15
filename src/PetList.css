@@ -1,0 +1,132 @@
+/* General Grid Layout */
+.pet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+    padding: 20px;
+    max-width: 1300px;
+    margin: 0 auto; /* Center the grid */
+}
+
+/* Heading Styling */
+h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #316333;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Pet Card Styling */
+.pet-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure all cards are the same height */
+}
+
+/* Pet Image Styling */
+.pet-image {
+    width: 100%; /* Set width to fill the parent container */
+    max-width: 200px; /* Limit the maximum width */
+    height: auto; /* Maintain the natural aspect ratio */
+    border-radius: 8px;
+    margin: 0 auto; /* Center the image */
+    display: block; /* Ensure the image is treated as a block element */
+}
+
+/* Pet Info Row Styling */
+.pet-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    margin-bottom: 10px; /* Add space between pet info and adopt button */
+    font-size: 14px;
+    color: #555;
+}
+
+.pet-info span {
+    padding: 0 10px; /* Add padding around each span */
+}
+
+/* Adopt Link Styling */
+.adopt-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.adopt-link:hover {
+    background-color: #45a049;
+}
+
+/* Media Query for Screens Smaller Than 960px */
+@media (max-width: 960px) {
+    .pet-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .pet-card {
+        padding: 10px;
+    }
+
+    .pet-card h3 {
+        font-size: 16px;
+    }
+
+    .pet-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .adopt-link {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Media Query for Screens Smaller Than 560px */
+@media (max-width: 560px) {
+    .pet-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .pet-card {
+        padding: 8px;
+    }
+
+    .pet-card h3 {
+        font-size: 14px;
+    }
+
+    .pet-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .adopt-link {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

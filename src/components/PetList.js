@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import "../PetList.css";
 
 function PetList({ pets }) {
   if (pets.length === 0) {
@@ -7,45 +8,30 @@ function PetList({ pets }) {
 
   return (
     <div>
-      <h2>Available Animals</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <h1>Available Animals</h1>
+      <div className="pet-grid">
         {pets.map((pet) => (
-          <div
-            key={pet.id}
-            style={{
-              border: '1px solid #ccc',
-              margin: '10px',
-              padding: '10px',
-              width: '250px',
-              borderRadius: '8px',
-              backgroundColor: '#f9f9f9',
-            }}
-          >
+          <div key={pet.id} className="pet-card">
             <h3>{pet.name}</h3>
-            <p>Type: {pet.type}</p>
-            <p>Age: {pet.age}</p>
-            <p>Size: {pet.size}</p>
-            {pet.photos.length > 0 && (
+            {pet.photos.length > 0 ? (
               <img
                 src={pet.photos[0].medium}
                 alt={pet.name}
-                style={{ width: '100%', borderRadius: '8px' }}
+                className="pet-image"
               />
+            ) : (
+              <p style={{ color: "#888" }}>No image available</p>
             )}
+            <div className="pet-info">
+              <span>Type: {pet.type}</span>
+              <span>Age: {pet.age}</span>
+              <span>Size: {pet.size}</span>
+            </div>
             <a
               href={`https://www.petfinder.com/petdetail/${pet.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: 'inline-block',
-                marginTop: '10px',
-                padding: '10px 20px',
-                backgroundColor: '#4CAF50',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '5px',
-                textAlign: 'center',
-              }}
+              className="adopt-link"
             >
               Adopt {pet.name}
             </a>

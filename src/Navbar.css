@@ -1,0 +1,84 @@
+/* Navbar container */
+.navbar {
+    background-color: #4caf50;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* Form styling */
+  .navbar form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .navbar label {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .navbar input,
+  .navbar select,
+  .navbar button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+  }
+  
+  /* Dropdown and input styling */
+  .navbar input,
+  .navbar select {
+    width: 200px;
+    margin-top: 5px;
+  }
+  
+  /* Button styling */
+  .navbar button {
+    background-color: #ff5722;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar button:hover {
+    background-color: #e64a19;
+  }
+  
+  /* Pagination controls */
+  .navbar .pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .navbar .pagination-controls button {
+    background-color: #2196f3;
+    padding: 10px 15px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .navbar .pagination-controls button:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+  }
+  
+  .navbar .pagination-controls span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+  }
