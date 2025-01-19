@@ -96,7 +96,7 @@ function Navbar({
 
   return (
     <div className="navbar">
-      <h1>Adoption Portal</h1>
+      <h1>Paws and Claws Adoption Portal</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Species:
